@@ -1,5 +1,6 @@
 package com.example.convertbitmaptobase64.domain.domain;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
