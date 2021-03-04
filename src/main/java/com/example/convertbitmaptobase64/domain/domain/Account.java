@@ -23,7 +23,6 @@ public class Account {
     private String agency;
     private String number;
     private BigDecimal balance;
-    private File logo;
 
 }
 
