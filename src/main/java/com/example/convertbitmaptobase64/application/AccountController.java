@@ -32,4 +32,9 @@ public class AccountController {
         return service.getStatementString(id);
     }
 
+    @GetMapping("/{id}/statement-convert-and-encode")
+    public String convertAndEncode(@PathVariable Long id) {
+        return service.convertAndEncode(id);
+    }
+
 }

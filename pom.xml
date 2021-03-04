@@ -54,6 +54,20 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-freemarker</artifactId>
 		</dependency>
+		<!-- https://jar-download.com/artifacts/org.xhtmlrenderer/core-renderer/R8pre2/source-code/org/xhtmlrenderer/swing/Java2DRenderer.java -->
+		<!-- https://mvnrepository.com/artifact/com.github.nifty-gui/nifty-java2d-renderer -->
+		<dependency>
+			<groupId>org.xhtmlrenderer</groupId>
+			<artifactId>core-renderer</artifactId>
+			<version>R8pre2</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
