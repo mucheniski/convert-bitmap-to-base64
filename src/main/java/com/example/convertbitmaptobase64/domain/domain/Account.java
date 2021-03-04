@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.File;
 import java.math.BigDecimal;
 
 @Data
@@ -22,6 +23,7 @@ public class Account {
     private String agency;
     private String number;
     private BigDecimal balance;
+    private File logo;
 
 }
 

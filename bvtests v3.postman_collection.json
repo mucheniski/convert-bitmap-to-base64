@@ -44,6 +44,46 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "statement string",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/accounts/1/statement-string",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"accounts",
+								"1",
+								"statement-string"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "statement view",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/accounts/1/statement-view",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"accounts",
+								"1",
+								"statement-view"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

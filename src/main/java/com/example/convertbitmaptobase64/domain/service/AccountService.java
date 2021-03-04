@@ -12,6 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,8 +38,7 @@ public class AccountService {
 
     public String getStatementString(Long id) {
         Account account = findById(id);
-        String templateString = processTemplate(account);
-        return templateString;
+        return processTemplate(account);
     }
 
     private String processTemplate(Account account) {

@@ -1,9 +1,53 @@
 <html>
 <body>
-    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 400px; color: #6F6F6F">
+    <table width="100%" border="0" style="max-width: 400px; color: #6F6F6F">
         <tr>
-            <td style="font-size: small; padding-top: 15px; padding-bottom: 0px;">Name</td>
-            <td style="font-weight:bold; padding-top: 0px;">${account.name}</td>
+            <td style="width: 20px; height: 20px;">logo</td>
+        </tr>
+        <tr>
+            <td style="padding-bottom: 10px;"></td>
+        </tr>
+        <tr>
+            <td style="font-size: small;">Nome</td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold;">${account.name}</td>
+        </tr>
+        <tr>
+            <td style="padding-bottom: 10px;"></td>
+        </tr>
+        <tr>
+            <td style="font-size: small;">Banco</td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold;">${account.bankname}</td>
+        </tr>
+        <tr>
+            <td style="padding-bottom: 10px;"></td>
+        </tr>
+        <tr>
+            <td style="font-size: small;">Agência</td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold;">${account.agency}</td>
+        </tr>
+        <tr>
+            <td style="padding-bottom: 10px;"></td>
+        </tr>
+        <tr>
+            <td style="font-size: small;">Número</td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold;">${account.number}</td>
+        </tr>
+        <tr>
+            <td style="padding-bottom: 10px;"></td>
+        </tr>
+        <tr>
+            <td style="font-size: small;">Saldo</td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold;">${account.balance?string.currency}</td>
         </tr>
     </table>
 </body>
