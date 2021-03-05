@@ -23,12 +23,12 @@ public class HTMLConverter {
     @Autowired
     private Configuration freeMarkerConfiguration;
 
-    public BufferedImage convertToBufferedImage(Account account) {
+    public BufferedImage convertToBufferedImage(Account account, int width, int height) {
         try {
             String pageHtml = getStatementString(account);
             Path tempFile = Files.createTempFile("sampleFile","html");
             FileUtils.writeStringToFile(tempFile.toFile(), pageHtml, StandardCharsets.UTF_8.name());
-            Java2DRenderer renderer = new Java2DRenderer(tempFile.toFile(), 398, 712);
+            Java2DRenderer renderer = new Java2DRenderer(tempFile.toFile(), width, height);
             return renderer.getImage();
         } catch (Exception e) {
             throw new GeneralApiException("Error to convert to BufferedImage ", e);

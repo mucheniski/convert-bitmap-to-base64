@@ -3,10 +3,7 @@ package com.example.convertbitmaptobase64.application;
 import com.example.convertbitmaptobase64.domain.domain.Account;
 import com.example.convertbitmaptobase64.domain.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,8 +30,8 @@ public class AccountController {
     }
 
     @GetMapping("/{id}/statement-convert-and-encode")
-    public String convertAndEncode(@PathVariable Long id) {
-        return service.convertAndEncode(id);
+    public String convertAndEncode(@PathVariable Long id, @RequestParam int width, @RequestParam int height) {
+        return service.convertAndEncode(id, width, height);
     }
 
 }

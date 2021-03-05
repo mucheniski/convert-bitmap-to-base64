@@ -51,10 +51,10 @@ public class AccountService {
         return htmlConverter.getStatementString(account);
     }
 
-    public String convertAndEncode(Long id) {
+    public String convertAndEncode(Long id, int width, int height) {
         try {
             Account account = findById(id);
-            BufferedImage bufferedImage = htmlConverter.convertToBufferedImage(account);
+            BufferedImage bufferedImage = htmlConverter.convertToBufferedImage(account, width, height);
             return base64Converter.encodeImageToBase64(bufferedImage);
         } catch (Exception e) {
             throw new GeneralApiException("Error to convert to and decode ", e);
