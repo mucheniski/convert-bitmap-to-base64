@@ -25,7 +25,7 @@ public class HTMLConverter {
 
     public BufferedImage convertToBufferedImage(Account account, int width, int height) {
         try {
-            String pageHtml = getStatementString(account);
+            String pageHtml = processTemplate(account);
             Path tempFile = Files.createTempFile("sampleFile","html");
             FileUtils.writeStringToFile(tempFile.toFile(), pageHtml, StandardCharsets.UTF_8.name());
             Java2DRenderer renderer = new Java2DRenderer(tempFile.toFile(), width, height);
@@ -35,11 +35,7 @@ public class HTMLConverter {
         }
     }
 
-    public String getStatementString(Account account) {
-        return processTemplate(account);
-    }
-
-    private String processTemplate(Account account) {
+    public String processTemplate(Account account) {
         try {
             Template template = freeMarkerConfiguration.getTemplate("statement.html");
             HashMap<String, Object> model = new HashMap<>();

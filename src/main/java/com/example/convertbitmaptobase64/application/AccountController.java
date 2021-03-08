@@ -34,4 +34,9 @@ public class AccountController {
         return service.convertAndEncode(id, width, height);
     }
 
+    @GetMapping("/decode-base64-to-bitmap")
+    public void decodeBase64ToBitmap(@RequestParam String fileName) {
+        service.decodeBase64ToBitmap(fileName);
+    }
+
 }
