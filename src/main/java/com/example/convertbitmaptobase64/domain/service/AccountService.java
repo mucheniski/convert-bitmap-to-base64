@@ -70,12 +70,12 @@ public class AccountService {
 
     private void encodeLogoOnStatement(Account account) {
         try {
-            Path filePath = Paths.get(defaultImageTemplatesPath + "logobv.png");
+            Path filePath = Paths.get(defaultImageTemplatesPath + "logobvsmall.png");
             byte[] data = new byte[0];
             data = Files.readAllBytes(filePath);
             byte[] encoded = Base64.getEncoder().encode(data);
             String imgDataAsBase64 = new String(encoded);
-            account.setLogo("data:image/png;base64,"+imgDataAsBase64);
+            account.setLogo("data:image/bmp;base64,"+imgDataAsBase64);
 
             // Write base64 in file if you need
 //            FileWriter fileWriter = new FileWriter(defaultImageTemplatesPath + "logobase64.txt");
