@@ -2,56 +2,61 @@
 <html>
 <head>
     <title>POC STATEMENT</title>
+    <style type="text/css">
+        #logo{
+            float: left;
+            padding-right: 10px;
+        }
+        #title {
+            font-size:large;
+            font-weight:bold;
+        }
+        .label{
+            font-size: small;
+            padding-top: 15px;
+            padding-bottom: 0px;
+        }
+        .text{
+            font-weight:bold;
+            padding-top: 0px;
+        }
+    </style>
 </head>
 <body>
     <table width="100%" border="0" style="max-width: 400px; color: #6F6F6F">
         <tr>
             <td><img src="${account.logo}" width="20px" height="20px"/></td>
+<!--            <td><img src="/images/logobvsmall.png"></img></td>-->
         </tr>
         <tr>
-            <td style="padding-bottom: 10px;"></td>
+            <td class="label">Nome</td>
         </tr>
         <tr>
-            <td style="font-size: small;">Nome</td>
+            <td class="text">${account.name}</td>
         </tr>
         <tr>
-            <td style="font-weight: bold;">${account.name}</td>
+            <td class="label">Banco</td>
         </tr>
         <tr>
-            <td style="padding-bottom: 10px;"></td>
+            <td class="text">${account.bankname}</td>
         </tr>
         <tr>
-            <td style="font-size: small;">Banco</td>
+            <td class="label">Agência</td>
         </tr>
         <tr>
-            <td style="font-weight: bold;">${account.bankname}</td>
+            <td class="text">${account.agency}</td>
         </tr>
         <tr>
-            <td style="padding-bottom: 10px;"></td>
+            <td class="label">Número</td>
         </tr>
         <tr>
-            <td style="font-size: small;">Agência</td>
+            <td class="text">${account.number}</td>
         </tr>
         <tr>
-            <td style="font-weight: bold;">${account.agency}</td>
+            <td class="label">Saldo</td>
         </tr>
         <tr>
-            <td style="padding-bottom: 10px;"></td>
-        </tr>
-        <tr>
-            <td style="font-size: small;">Número</td>
-        </tr>
-        <tr>
-            <td style="font-weight: bold;">${account.number}</td>
-        </tr>
-        <tr>
-            <td style="padding-bottom: 10px;"></td>
-        </tr>
-        <tr>
-            <td style="font-size: small;">Saldo</td>
-        </tr>
-        <tr>
-            <td style="font-weight: bold;">${account.balance?string.currency}</td>
+            <td class="text">${account.balance?string.currency}</td>
         </tr>
     </table>
 </body>

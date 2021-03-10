@@ -37,7 +37,7 @@ public class HTMLConverter {
 
     public String processTemplate(Account account) {
         try {
-            Template template = freeMarkerConfiguration.getTemplate("statement.html");
+            Template template = freeMarkerConfiguration.getTemplate("statement2.html");
             HashMap<String, Object> model = new HashMap<>();
             model.put("account", account);
             return FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
