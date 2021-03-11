@@ -27,11 +27,10 @@ public class Base64Converter {
         byte[] bytes = toByteArray(bufferedImage, "bmp");
         String imageString = Base64.getEncoder().encodeToString(bytes);
         String filePath = defaultImageTemplatesPath + "testencodebase64.txt";
-        // Write base64 in file if you need
-        FileWriter fileWriter = new FileWriter(filePath);
-        fileWriter.write(imageString);
-        fileWriter.close();
+
+        saveFileOnDisk(filePath, imageString);
         decodeBase64ToImageAndSaveFile(filePath);
+
         return imageString;
     }
 
@@ -44,6 +43,12 @@ public class Base64Converter {
         fileOutputStream.write(bytes64);
         fileOutputStream.close();
         inputStream.close();
+    }
+
+    private void saveFileOnDisk(String path, String file) throws IOException {
+        FileWriter fileWriter = new FileWriter(path);
+        fileWriter.write(file);
+        fileWriter.close();
     }
 
     // convert BufferedImage to byte[]

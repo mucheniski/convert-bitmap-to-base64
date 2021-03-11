@@ -46,6 +46,38 @@
 					"response": []
 				},
 				{
+					"name": "decode base64 to bitmap",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "fileName",
+								"value": "logobase64.txt",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/accounts/decode-base64-to-bitmap?fileName=testencodebase64.txt",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"accounts",
+								"decode-base64-to-bitmap"
+							],
+							"query": [
+								{
+									"key": "fileName",
+									"value": "testencodebase64.txt"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "statement string",
 					"request": {
 						"method": "GET",

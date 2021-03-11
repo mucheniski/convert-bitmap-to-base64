@@ -2,6 +2,7 @@ package com.example.convertbitmaptobase64.common;
 
 import com.example.convertbitmaptobase64.application.exception.GeneralApiException;
 import com.example.convertbitmaptobase64.domain.domain.Account;
+import com.example.convertbitmaptobase64.domain.domain.AccountDTO;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.apache.commons.io.FileUtils;
@@ -23,9 +24,9 @@ public class HTMLConverter {
     @Autowired
     private Configuration freeMarkerConfiguration;
 
-    public BufferedImage convertToBufferedImage(Account account, int width, int height) {
+    public BufferedImage convertToBufferedImage(AccountDTO accountDTO, int width, int height) {
         try {
-            String pageHtml = processTemplate(account);
+            String pageHtml = processTemplate(accountDTO);
             Path tempFile = Files.createTempFile("sampleFile","html");
             FileUtils.writeStringToFile(tempFile.toFile(), pageHtml, StandardCharsets.UTF_8.name());
             Java2DRenderer renderer = new Java2DRenderer(tempFile.toFile(), width, height);
@@ -35,11 +36,11 @@ public class HTMLConverter {
         }
     }
 
-    public String processTemplate(Account account) {
+    public String processTemplate(AccountDTO accountDTO) {
         try {
             Template template = freeMarkerConfiguration.getTemplate("statement2.html");
             HashMap<String, Object> model = new HashMap<>();
-            model.put("account", account);
+            model.put("account", accountDTO);
             return FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
         } catch (Exception e) {
             throw new GeneralApiException("Error to generate a template string ", e);

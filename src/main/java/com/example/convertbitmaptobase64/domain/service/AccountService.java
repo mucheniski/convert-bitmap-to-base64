@@ -4,6 +4,7 @@ import com.example.convertbitmaptobase64.application.exception.GeneralApiExcepti
 import com.example.convertbitmaptobase64.common.Base64Converter;
 import com.example.convertbitmaptobase64.common.HTMLConverter;
 import com.example.convertbitmaptobase64.domain.domain.Account;
+import com.example.convertbitmaptobase64.domain.domain.AccountDTO;
 import com.example.convertbitmaptobase64.domain.exception.EntityNotFoundException;
 import com.example.convertbitmaptobase64.domain.port.AccountRepository;
 import freemarker.template.Configuration;
@@ -51,17 +52,25 @@ public class AccountService {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Not found with id " + id));
     }
 
-    public String getStatementString(Long id) {
-        Account account = findById(id);
-        encodeLogoOnStatement(account);
-        return htmlConverter.processTemplate(account);
-    }
+//    public String getStatementString(Long id) {
+//        Account account = findById(id);
+//        //encodeLogoOnStatement(account);
+//        return htmlConverter.processTemplate(account);
+//    }
 
     public String convertAndEncode(Long id, int width, int height) {
         try {
             Account account = findById(id);
-            encodeLogoOnStatement(account);
-            BufferedImage bufferedImage = htmlConverter.convertToBufferedImage(account, width, height);
+            AccountDTO accountDTO = new AccountDTO();
+            accountDTO.setImglogo(account.getImgLogo().getBinaryStream());
+            accountDTO.setId(account.getId());
+            accountDTO.setName(account.getName());
+            accountDTO.setBankname(account.getBankname());
+            accountDTO.setAgency(account.getAgency());
+            accountDTO.setNumber(account.getNumber());
+            accountDTO.setBalance(account.getBalance());
+//            encodeLogoOnStatement(account);
+            BufferedImage bufferedImage = htmlConverter.convertToBufferedImage(accountDTO, width, height);
             return base64Converter.encodeImageToBase64(bufferedImage);
         } catch (Exception e) {
             throw new GeneralApiException("Error to convert to and decode ", e);
@@ -74,7 +83,8 @@ public class AccountService {
             byte[] data = new byte[0];
             data = Files.readAllBytes(filePath);
             String imgDataAsBase64 = Base64.getEncoder().encodeToString(data);
-            account.setLogo("data:image/bmp;base64," + imgDataAsBase64);
+//            account.setLogo("data:image/bmp;base64," + imgDataAsBase64);
+            account.setLogo(imgDataAsBase64);
 
             // Write base64 in file if you need
 //            FileWriter fileWriter = new FileWriter(defaultImageTemplatesPath + "logobase64.txt");

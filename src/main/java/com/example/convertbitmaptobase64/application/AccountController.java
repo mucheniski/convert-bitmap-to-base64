@@ -24,10 +24,10 @@ public class AccountController {
         return service.findById(id);
     }
 
-    @GetMapping("/{id}/statement-string")
-    public String getStatamentString(@PathVariable Long id) {
-        return service.getStatementString(id);
-    }
+//    @GetMapping("/{id}/statement-string")
+//    public String getStatamentString(@PathVariable Long id) {
+//        return service.getStatementString(id);
+//    }
 
     @GetMapping("/{id}/statement-convert-and-encode")
     public String convertAndEncode(@PathVariable Long id, @RequestParam int width, @RequestParam int height) {
