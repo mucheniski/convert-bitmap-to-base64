@@ -24,9 +24,9 @@ public class HTMLConverter {
     @Autowired
     private Configuration freeMarkerConfiguration;
 
-    public BufferedImage convertToBufferedImage(AccountDTO accountDTO, int width, int height) {
+    public BufferedImage convertToBufferedImage(Account account, int width, int height) {
         try {
-            String pageHtml = processTemplate(accountDTO);
+            String pageHtml = processTemplate(account);
             Path tempFile = Files.createTempFile("sampleFile","html");
             FileUtils.writeStringToFile(tempFile.toFile(), pageHtml, StandardCharsets.UTF_8.name());
             Java2DRenderer renderer = new Java2DRenderer(tempFile.toFile(), width, height);
@@ -36,11 +36,11 @@ public class HTMLConverter {
         }
     }
 
-    public String processTemplate(AccountDTO accountDTO) {
+    public String processTemplate(Account account) {
         try {
             Template template = freeMarkerConfiguration.getTemplate("statement2.html");
             HashMap<String, Object> model = new HashMap<>();
-            model.put("account", accountDTO);
+            model.put("account", account);
             return FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
         } catch (Exception e) {
             throw new GeneralApiException("Error to generate a template string ", e);

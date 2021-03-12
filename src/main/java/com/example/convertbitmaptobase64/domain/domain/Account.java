@@ -30,13 +30,5 @@ public class Account {
     private String number;
     private BigDecimal balance;
 
-    @Lob
-    private Blob imglogo;
-
-    @JsonIgnore
-    public Blob getImgLogo() {
-        return imglogo;
-    }
-
 }
 
