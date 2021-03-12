@@ -27,9 +27,7 @@ public class Base64Converter {
 
     public String encodeImageToBase64(BufferedImage bufferedImage) throws IOException {
         byte[] bytesBody = toByteArray(bufferedImage, "bmp");
-
-        Path imgLogo = Paths.get(defaultImageTemplatesPath + "logobvsmall.bmp");
-        byte[] bytesLogo = Files.readAllBytes(imgLogo);
+        byte[] byteLogo = getLogoInByte(defaultImageTemplatesPath + "logobvsmall.bmp");
 
 //        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 //        outputStream.write(bytesBody);
@@ -42,20 +40,23 @@ public class Base64Converter {
         String imageString = Base64.getEncoder().encodeToString(bytesBody);
         String filePath = defaultImageTemplatesPath + "testencodebase64.txt";
 
-
         saveFileOnDisk(filePath, imageString);
         decodeBase64ToImageAndSaveFile(filePath);
 
         return imageString;
     }
 
-    public static byte[] joinByteArray(byte[] byte1, byte[] byte2) {
+    private byte[] getLogoInByte(String path) throws IOException {
+        Path imgLogo = Paths.get(path);
+        byte[] bytesLogo = Files.readAllBytes(imgLogo);
+        return bytesLogo;
+    }
 
+    public static byte[] joinByteArray(byte[] byte1, byte[] byte2) {
         return ByteBuffer.allocate(byte1.length + byte2.length)
                 .put(byte1)
                 .put(byte2)
                 .array();
-
     }
 
     /*

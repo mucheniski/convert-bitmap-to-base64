@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 public class AccountDTO {
 
     private Long id;
-
+    private String logo;
     private String name;
     private String bankname;
     private String agency;

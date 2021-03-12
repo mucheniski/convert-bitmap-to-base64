@@ -40,4 +40,9 @@ public class AccountController {
         service.decodeBase64ToBitmap(fileName);
     }
 
+    @GetMapping("/{id}/test")
+    public void test(@PathVariable Long id) throws IOException {
+        service.test(id);
+    }
+
 }

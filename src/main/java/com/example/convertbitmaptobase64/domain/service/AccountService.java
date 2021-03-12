@@ -9,6 +9,7 @@ import com.example.convertbitmaptobase64.domain.exception.EntityNotFoundExceptio
 import com.example.convertbitmaptobase64.domain.port.AccountRepository;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+import gui.ava.html.image.generator.HtmlImageGenerator;
 import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +19,7 @@ import org.xhtmlrenderer.swing.Java2DRenderer;
 import org.apache.commons.io.FileUtils;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.charset.Charset;
@@ -80,20 +82,34 @@ public class AccountService {
 
     private AccountDTO convetToDTO(Account account) throws IOException {
 
-//        Path filePath = Paths.get(defaultImageTemplatesPath + "logobvsmall.bmp");
-//        byte[] data = new byte[0];
-//        data = Files.readAllBytes(filePath);
-//        String imgDataAsBase64 = Base64.getEncoder().encodeToString(data);
+        Path filePath = Paths.get(defaultImageTemplatesPath + "logobvsmall.bmp");
+        byte[] data = new byte[0];
+        data = Files.readAllBytes(filePath);
+        String imgDataAsBase64 = Base64.getEncoder().encodeToString(data);
 
         return AccountDTO.builder()
                     .id(account.getId())
-//                    .logo(imgDataAsBase64)
+                    .logo("data:image/png;base64,"+imgDataAsBase64)
                     .name(account.getName())
                     .bankname(account.getBankname())
                     .agency(account.getAgency())
                     .number(account.getNumber())
                     .balance(account.getBalance())
                   .build();
+    }
+
+    public void test(Long id) throws IOException {
+        HtmlImageGenerator imageGenerator = new HtmlImageGenerator();
+
+        Account account = findById(id);
+        AccountDTO accountDTO = convetToDTO(account);
+
+        String pageHtml = htmlConverter.processTemplate(accountDTO);
+
+        imageGenerator.loadHtml(pageHtml);
+        imageGenerator.setSize(new Dimension(398, 712));
+        imageGenerator.saveAsImage(defaultImageTemplatesPath + "teste.bmp");
+
     }
 
 
