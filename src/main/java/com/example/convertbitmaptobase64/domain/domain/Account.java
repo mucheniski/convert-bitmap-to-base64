@@ -23,7 +23,6 @@ public class Account {
     @Id
     private Long id;
 
-    private String logo;
     private String name;
     private String bankname;
     private String agency;

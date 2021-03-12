@@ -5,6 +5,7 @@ import com.example.convertbitmaptobase64.domain.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -25,7 +26,7 @@ public class AccountController {
     }
 
     @GetMapping("/{id}/statement-string")
-    public String getStatamentString(@PathVariable Long id) {
+    public String getStatamentString(@PathVariable Long id) throws IOException {
         return service.getStatementString(id);
     }
 

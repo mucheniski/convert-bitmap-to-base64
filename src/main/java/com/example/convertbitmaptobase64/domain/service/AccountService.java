@@ -52,38 +52,20 @@ public class AccountService {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Not found with id " + id));
     }
 
-    public String getStatementString(Long id) {
+    public String getStatementString(Long id) throws IOException {
         Account account = findById(id);
-        encodeLogoOnStatement(account);
-        return htmlConverter.processTemplate(account);
+        AccountDTO accountDTO = convetToDTO(account);
+        return htmlConverter.processTemplate(accountDTO);
     }
 
     public String convertAndEncode(Long id, int width, int height) {
         try {
             Account account = findById(id);
-            encodeLogoOnStatement(account);
-            BufferedImage bufferedImage = htmlConverter.convertToBufferedImage(account, width, height);
+            AccountDTO accountDTO = convetToDTO(account);
+            BufferedImage bufferedImage = htmlConverter.convertToBufferedImage(accountDTO, width, height);
             return base64Converter.encodeImageToBase64(bufferedImage);
         } catch (Exception e) {
             throw new GeneralApiException("Error to convert to and decode ", e);
-        }
-    }
-
-    private void encodeLogoOnStatement(Account account) {
-        try {
-            Path filePath = Paths.get(defaultImageTemplatesPath + "logobvsmall.bmp");
-            byte[] data = new byte[0];
-            data = Files.readAllBytes(filePath);
-            String imgDataAsBase64 = Base64.getEncoder().encodeToString(data);
-            account.setLogo("data:image/bmp;base64," + imgDataAsBase64);
-
-//            // Write base64 in file if you need
-//            FileWriter fileWriter = new FileWriter(defaultImageTemplatesPath + "logobase64.txt");
-//            fileWriter.write(imgDataAsBase64);
-//            fileWriter.close();
-
-        } catch (Exception e) {
-            new GeneralApiException("Error to encode logo", e);
         }
     }
 
@@ -95,4 +77,24 @@ public class AccountService {
             new GeneralApiException("Error to decode file", e);
         }
     }
+
+    private AccountDTO convetToDTO(Account account) throws IOException {
+
+//        Path filePath = Paths.get(defaultImageTemplatesPath + "logobvsmall.bmp");
+//        byte[] data = new byte[0];
+//        data = Files.readAllBytes(filePath);
+//        String imgDataAsBase64 = Base64.getEncoder().encodeToString(data);
+
+        return AccountDTO.builder()
+                    .id(account.getId())
+//                    .logo(imgDataAsBase64)
+                    .name(account.getName())
+                    .bankname(account.getBankname())
+                    .agency(account.getAgency())
+                    .number(account.getNumber())
+                    .balance(account.getBalance())
+                  .build();
+    }
+
+
 }

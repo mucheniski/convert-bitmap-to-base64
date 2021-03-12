@@ -10,9 +10,11 @@ import org.xhtmlrenderer.swing.Java2DRenderer;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.Random;
 import java.util.UUID;
@@ -24,14 +26,54 @@ public class Base64Converter {
     private String defaultImageTemplatesPath;
 
     public String encodeImageToBase64(BufferedImage bufferedImage) throws IOException {
-        byte[] bytes = toByteArray(bufferedImage, "bmp");
-        String imageString = Base64.getEncoder().encodeToString(bytes);
+        byte[] bytesBody = toByteArray(bufferedImage, "bmp");
+
+        Path imgLogo = Paths.get(defaultImageTemplatesPath + "logobvsmall.bmp");
+        byte[] bytesLogo = Files.readAllBytes(imgLogo);
+
+//        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//        outputStream.write(bytesBody);
+//        outputStream.write(bytesLogo);
+//
+//        byte[] allBytes = outputStream.toByteArray();
+
+//        byte[] allBytes = joinByteArray(bytesLogo, bytesBody);
+
+        String imageString = Base64.getEncoder().encodeToString(bytesBody);
         String filePath = defaultImageTemplatesPath + "testencodebase64.txt";
+
 
         saveFileOnDisk(filePath, imageString);
         decodeBase64ToImageAndSaveFile(filePath);
 
         return imageString;
+    }
+
+    public static byte[] joinByteArray(byte[] byte1, byte[] byte2) {
+
+        return ByteBuffer.allocate(byte1.length + byte2.length)
+                .put(byte1)
+                .put(byte2)
+                .array();
+
+    }
+
+    /*
+        Usado para o encode do logo em Base64 e retorno em String
+     */
+    private String encodeLogoOnStatement() throws IOException {
+
+            Path filePath = Paths.get(defaultImageTemplatesPath + "logobvsmall.bmp");
+            byte[] data = new byte[0];
+            data = Files.readAllBytes(filePath);
+            String imgDataAsBase64 = Base64.getEncoder().encodeToString(data);
+            return  imgDataAsBase64;
+
+//            // Write base64 in file if you need
+//            FileWriter fileWriter = new FileWriter(defaultImageTemplatesPath + "logobase64.txt");
+//            fileWriter.write(imgDataAsBase64);
+//            fileWriter.close();
+
     }
 
     public void decodeBase64ToImageAndSaveFile(String pathFile) throws IOException {
